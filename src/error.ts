@@ -16,7 +16,7 @@ export class StatusError extends Error {
 export const errorHandler: ErrorRequestHandler = (err: StatusError, req, res, next) => {
   console.error(err.stack);
   res.status(err.status || 500);
-  res.json({ message: err.message, error: isProduction() ? {} : err.stack });
+  res.json({ message: err.error, error: isProduction() ? {} : err.stack });
 };
 
 function isProduction() {
