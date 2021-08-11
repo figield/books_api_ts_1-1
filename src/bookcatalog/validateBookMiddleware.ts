@@ -1,14 +1,14 @@
 import { validateBook } from "./validateBook";
+import {Request, Response, NextFunction} from "express";
+import {StatusError} from "../error";
 
-export function validate(req, res, next) {
+export function validate(req: Request, res: Response, next: NextFunction) {
   const validateErrors = validateBook(req.body);
 
   if (validateErrors) {
-    const error = new Error();
-    // @ts-ignore
-    error.message = validateErrors;
-    // @ts-ignore
-    error.status = 400;
+    const error = new StatusError(validateErrors, 400);
+    // error.message = validateErrors;
+    // error.status = 400;
     next(error);
   } else {
     next();

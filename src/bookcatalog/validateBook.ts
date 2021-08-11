@@ -1,4 +1,5 @@
 import Joi from "joi";
+import {BookDTO} from "./book";
 
 const authorSchema = Joi.string().required().min(1).max(50);
 
@@ -9,7 +10,8 @@ const schema = Joi.object({
   isbn: Joi.string().required().uppercase().length(10),
 });
 
-export function validateBook(book) {
+// parse, don't validate
+export function validateBook(book: unknown) {
   const result = schema.validate(book, {
     allowUnknown: false,
     convert: true,
