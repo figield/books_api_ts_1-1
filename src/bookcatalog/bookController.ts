@@ -6,6 +6,9 @@
 // }
 import mapValues from "lodash.mapvalues";
 import { bookLink } from "./links";
+import {BookService} from "./bookService";
+import {BookRepository} from "./book";
+import {Request, Response, NextFunction} from "express";
 
 // const mapValues = (api, f) => Object.fromEntries(Object.entries(api).map(([key, value]) => [key, f(value)]));
 
@@ -23,7 +26,12 @@ function wrapWithTryCatch(fn) {
   };
 }
 
-export const bookControllerFactory = ({ bookService, bookRepository }) =>
+interface BookControllerDeps {
+  bookService: BookService;
+  bookRepository: BookRepository;
+}
+
+export const bookControllerFactory = ({ bookService, bookRepository }: BookControllerDeps) =>
   withErrorHandling({
     async createOrUpdate(req, res, next) {
       // HTTP
