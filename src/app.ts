@@ -3,8 +3,9 @@ import express from "express";
 import { bookRoutesFactory } from "./bookcatalog/bookRoutes";
 
 import { errorHandler, notFound } from "./error";
+import {Db} from "mongodb";
 
-export const appFactory = (db) => {
+export const appFactory = (db: Db) => {
   const app = express();
 
   const bookRoutes = bookRoutesFactory(db);

@@ -12,6 +12,6 @@ export const resources = {
   BOOK: "/book/:isbn",
   BOOK_COLLECTION: "/book",
 };
-export function bookLink(isbn) {
+export function bookLink(isbn: string) {
   return resources.BOOK.replace(":isbn", isbn);
 }
